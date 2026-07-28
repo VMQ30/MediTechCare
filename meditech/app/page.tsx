@@ -371,7 +371,7 @@ function Contact() {
                   Email
                 </div>
                 <div className="mt-0.5 font-body text-sm font-medium text-foreground">
-                  care@meditech.health
+                  meditechcare@gmail.com
                 </div>
               </div>
             </div>
