@@ -6,7 +6,10 @@ import {
   CalendarDays,
   ChevronDown,
   LayoutDashboard,
+  Mail,
+  MapPin,
   MessagesSquare,
+  Phone,
   Users,
 } from "lucide-react";
 import Image from "next/image";
@@ -321,6 +324,207 @@ function FAQ() {
   );
 }
 
+function Contact() {
+  const MEDICALFIELDS = [
+    "General Medicine / Family Medicine",
+    "Cardiology",
+    "Dermatology",
+    "Pediatrics",
+    "Neurology",
+    "Orthopedics",
+    "Psychiatry & Mental Health",
+    "Obstetrics & Gynecology",
+    "Ophthalmology",
+    "ENT (Ear, Nose, Throat)",
+    "Other",
+  ];
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    //TODO
+  };
+
+  return (
+    <section
+      id="contact"
+      className="scroll-mt-24 py-20 border-t border-border border-t-[2px] sm:py-28"
+    >
+      <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+        <Reveal delay={0}>
+          <p className="font-body uppercase text-[12px] tracking-[0.2rem] font-medium text-secondary-foreground">
+            Request an appointment
+          </p>
+          <h2 className="mt-4 text-balance font-display text-3xl font-medium leading-tight sm:text-4xl">
+            Set an Appointment
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+            Contact us anytime to match with trusted healthcare providers suited
+            to your schedule and health concerns.
+          </p>
+
+          <div className="mt-8 space-y-4">
+            <div className="flex items-center gap-4 rounded-sm border border-border bg-card p-4 transition-colors hover:bg-primary-soft/50">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-primary-soft text-primary-deep">
+                <Mail className="size-5" aria-hidden="true" strokeWidth={1.5} />
+              </span>
+              <div>
+                <div className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                  Email
+                </div>
+                <div className="mt-0.5 font-body text-sm font-medium text-foreground">
+                  care@meditech.health
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 rounded-sm border border-border bg-card p-4 transition-colors hover:bg-primary-soft/50">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-primary-soft text-primary-deep">
+                <Phone
+                  className="size-5"
+                  aria-hidden="true"
+                  strokeWidth={1.5}
+                />
+              </span>
+              <div>
+                <div className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                  Phone
+                </div>
+                <div className="mt-0.5 font-body text-sm font-medium text-foreground">
+                  +63 (2) 8123 4567
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 rounded-sm border border-border bg-card p-4 transition-colors hover:bg-primary-soft/50">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-primary-soft text-primary-deep">
+                <MapPin
+                  className="size-5"
+                  aria-hidden="true"
+                  strokeWidth={1.5}
+                />
+              </span>
+              <div>
+                <div className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                  Address
+                </div>
+                <div className="mt-0.5 font-body text-sm font-medium text-foreground">
+                  MediTech Care, Metro Manila, Philippines
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={100}>
+          <form
+            onSubmit={handleSubmit}
+            className="grid gap-5 rounded-sm bg-card p-6 sm:grid-cols-2 sm:p-9 border border-border"
+          >
+            <div className="sm:col-span-1">
+              <label
+                htmlFor="contact-name"
+                className="text-xs uppercase tracking-[0.14em] text-muted-foreground font-medium"
+              >
+                Full name
+              </label>
+              <input
+                id="contact-name"
+                type="text"
+                required
+                className="mt-2 w-full rounded-sm border border-border bg-background px-3.5 py-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary-deep focus:ring-2 focus:ring-ring/40"
+                placeholder="Juan Dela Cruz"
+                name="name"
+              />
+            </div>
+
+            <div className="sm:col-span-1">
+              <label
+                htmlFor="contact-email"
+                className="text-xs uppercase tracking-[0.14em] text-muted-foreground font-medium"
+              >
+                Email address
+              </label>
+              <input
+                id="contact-email"
+                type="email"
+                required
+                className="mt-2 w-full rounded-sm border border-border bg-background px-3.5 py-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary-deep focus:ring-2 focus:ring-ring/40"
+                placeholder="you@example.com"
+                name="email"
+              />
+            </div>
+
+            <div className="sm:col-span-1">
+              <label
+                htmlFor="contact-date"
+                className="text-xs uppercase tracking-[0.14em] text-muted-foreground font-medium"
+              >
+                Preferred time slot
+              </label>
+              <input
+                id="contact-date"
+                type="datetime-local"
+                className="mt-2 w-full rounded-sm border border-border bg-background px-3.5 py-3 text-sm outline-none transition-colors focus:border-primary-deep focus:ring-2 focus:ring-ring/40"
+                name="slot"
+              />
+            </div>
+
+            <div className="sm:col-span-1">
+              <label
+                htmlFor="contact-field"
+                className="text-xs uppercase tracking-[0.14em] text-muted-foreground font-medium"
+              >
+                Medical Field / Specialization
+              </label>
+              <div className="relative mt-2">
+                <select
+                  id="contact-field"
+                  name="medicalField"
+                  defaultValue=""
+                  className="w-full appearance-none rounded-sm border border-border bg-background px-3.5 py-3 pr-10 text-sm outline-none transition-colors focus:border-primary-deep focus:ring-2 focus:ring-ring/40 cursor-pointer text-foreground"
+                >
+                  <option value="" disabled>
+                    Select a medical field
+                  </option>
+                  {MEDICALFIELDS.map((field) => (
+                    <option key={field} value={field}>
+                      {field}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+              </div>
+            </div>
+
+            <div className="sm:col-span-2">
+              <label
+                htmlFor="contact-notes"
+                className="text-xs uppercase tracking-[0.14em] text-muted-foreground font-medium"
+              >
+                Notes
+              </label>
+              <textarea
+                id="contact-notes"
+                name="notes"
+                rows={4}
+                className="mt-2 w-full resize-y rounded-sm border border-border bg-background px-3.5 py-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary-deep focus:ring-2 focus:ring-ring/40"
+                placeholder="Reason for the consultation"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-primary-deep px-6 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:shadow-lift hover:brightness-110 sm:col-span-2 sm:w-fit cursor-pointer"
+            >
+              Submit request
+              <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </button>
+          </form>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg-py:15">
@@ -328,6 +532,7 @@ export default function Home() {
       <About />
       <Services />
       <FAQ />
+      <Contact />
     </main>
   );
 }
