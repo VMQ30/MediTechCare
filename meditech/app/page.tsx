@@ -1,7 +1,10 @@
+"use client";
+
 import { Reveal } from "./components/Reveal";
 import {
   ArrowRight,
   CalendarDays,
+  ChevronDown,
   LayoutDashboard,
   MessagesSquare,
   Users,
@@ -10,6 +13,7 @@ import Image from "next/image";
 import hero from "@/public/hero-section.jpg";
 import doctor from "@/public/doctor.jpg";
 import tablet from "@/public/tablet.jpg";
+import { useState } from "react";
 
 function HeroSection() {
   return (
@@ -222,12 +226,108 @@ function Services() {
   );
 }
 
+function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqs = [
+    {
+      question: "How do I book an appointment on MediTech Care?",
+      answer:
+        "You can easily book an appointment by creating an account, selecting your preferred specialist, and choosing an available time slot from their schedule.",
+    },
+    {
+      question: "Is my medical data secure?",
+      answer:
+        "Yes, all patient medical data is encrypted and stored in full compliance with healthcare privacy and security standards.",
+    },
+    {
+      question: "Can I consult a doctor remotely?",
+      answer:
+        "Yes, MediTech Care offers telemedicine capabilities so you can communicate securely with specialists from anywhere.",
+    },
+    {
+      question: "Who can access my patient records?",
+      answer:
+        "Only authorized healthcare professionals involved in your direct care and treatment have access to your health records.",
+    },
+  ];
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <section
+      id="faq"
+      className="scroll-mt-20 py-20 border-t border-border border-t-[2px] sm:py-28"
+    >
+      <Reveal delay={0}>
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="mt-5 text-balance text-primary-deep font-header text-[2.6rem] font-medium leading-[1.04] tracking-wide sm:text-6xl lg:text-[3rem]">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-base leading-relaxed text-muted-foreground mt-5 font-body ">
+            Clear answers about booking, security, and how MediTech Care works.
+          </p>
+        </div>
+      </Reveal>
+
+      <Reveal delay={100} className="mt-12">
+        <div className="font-body mx-auto max-w-4xl rounded-2xl border border-border bg-card p-2 sm:p-4">
+          <div className="w-full">
+            {faqs.map((faq, index) => {
+              const isOpen = openIndex === index;
+              return (
+                <div
+                  key={index}
+                  className="border-b border-border last:border-b-0"
+                >
+                  <h3>
+                    <button
+                      type="button"
+                      onClick={() => toggleFAQ(index)}
+                      aria-expanded={isOpen}
+                      className="flex w-full items-center justify-between px-4 py-4 text-left font-display text-base font-medium transition-all hover:no-underline cursor-pointer"
+                    >
+                      <span>{faq.question}</span>
+                      <ChevronDown
+                        className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 ${
+                          isOpen ? "rotate-180" : ""
+                        }`}
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </h3>
+                  <div
+                    className={`grid transition-all duration-300 ease-in-out ${
+                      isOpen
+                        ? "grid-rows-[1fr] opacity-100"
+                        : "grid-rows-[0fr] opacity-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="px-4 pb-4 text-sm leading-relaxed text-muted-foreground">
+                        {faq.answer}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg-py:15">
       <HeroSection />
       <About />
       <Services />
+      <FAQ />
     </main>
   );
 }
